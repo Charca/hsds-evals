@@ -1,0 +1,75 @@
+description: HSDS code-generation evals — Claude Agent SDK (mirrors real Claude Code)
+
+providers:
+  - id: anthropic:claude-agent-sdk
+    label: claude-code-sonnet-4-6
+    config:
+      model: claude-sonnet-4-6
+      # Resolved relative to this file → repo root. Gives the agent the same
+      # vantage point an engineer has when running Claude Code in this repo.
+      working_dir: ../hs-app-ui
+      # Default read-only tools (Read, Grep, Glob, LS) come for free when
+      # working_dir is set. Add Bash for `find`/`wc`/etc. No Write/Edit —
+      # the answer lives in the response, not on disk.
+      append_allowed_tools: ['Bash']
+      # Pre-approve the allow-list, deny everything else without prompting
+      # (non-interactive eval runs can't answer a permission prompt).
+      permission_mode: dontAsk
+      # Pick up the repo's CLAUDE.md and .claude/ commands — same project
+      # context an engineer would have in real Claude Code.
+      setting_sources: ['project']
+      # NOTE: exclude_dynamic_sections is intentionally OFF. It strips
+      # auto-memory (CLAUDE.md) from the preset prompt — its only upside was
+      # prompt-cache stability, which we don't use (eval runs with --no-cache).
+      # Leaving it off so the agent gets the repo's CLAUDE.md like real Claude Code.
+      max_turns: 50
+      # --- agent trace logging -------------------------------------------------
+      # Writes the raw Claude Agent SDK event stream (reasoning text + every
+      # tool call's input/output) to results/agent-debug.log (gitignored).
+      # To DISABLE later: comment out the two `debug` lines below.
+      # NOTE: concurrent cases interleave into one file — for a clean, readable
+      # trace run a single case, e.g. `npm run eval:debug -- --filter-first 1`.
+      debug: true
+      debug_file: ./results/agent-debug.log
+      # Uncomment for explicit extended-thinking blocks in the log (adds tokens):
+      # thinking: { type: enabled, budgetTokens: 4000 }
+      # -------------------------------------------------------------------------
+      append_system_prompt: |
+        ## HSDS code-generation task
+
+        Every user message in this session is a UI implementation task. For each one, generate a single self-contained React 17 + TypeScript component using the Help Scout Design System (HSDS).
+
+        Output rules:
+        - Structure your answer as the set of files you would actually create for this feature — split it the way a real implementation would (component, hooks, types, an index barrel, etc.). Don't cram everything into one file if it wouldn't belong there.
+        - Emit ONE fenced code block per file. Tag each block with its language (`tsx` or `ts`) and begin it with a single-line comment naming the file path, e.g. `// EditInbox.tsx`.
+        - No prose before, between, or after the code blocks.
+        - Do NOT modify any files in the repo. Your final assistant message is the answer.
+
+        Code rules:
+        - Try to use HSDS components to build the UI. Components live in `packages/hsds/components/`
+        - For HSDS usage instructions, read the AGENTS.md file at packages/hsds/AGENTS.md (if it exists).
+        - Components may also have usage .md files with more detailed instructions.
+        - Use icons from `@helpscout/hsds-icons`, e.g. `import Cross from '@helpscout/hsds-icons/cross'`.
+        - Try to avoid using style-components or inline styles unless you can't really build the UI using plain HSDS components.
+
+  # To compare Claude tiers, duplicate the provider block above and change
+  # `model` (e.g. claude-opus-4-7, claude-haiku-4-5). Promptfoo emits one
+  # column per provider.
+
+prompts:
+  - file://prompts/user-task.txt
+
+defaultTest:
+  assert:
+    - type: javascript
+      value: file://assertions/componentCoverage.js
+      metric: ComponentCoverage
+    - type: javascript
+      value: file://assertions/propCoverage.js
+      metric: PropCoverage
+    - type: javascript
+      value: file://assertions/customCssLines.js
+      metric: CustomCssLines
+
+tests: file://cases/*.yaml
+outputPath: results/latest.json

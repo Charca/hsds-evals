@@ -1,0 +1,11 @@
+description: Inline success alert with dismiss action
+vars:
+  task: >
+    Render a dismissible success alert that confirms the user's email
+    preferences were updated.
+metadata:
+  expectedComponents:
+    - name: Alert
+      props:
+        status: success
+        dismissible: true

@@ -1,0 +1,49 @@
+description: Form with Navigation (Text + Image Prompt)
+vars:
+  task: >
+    The file packages/hsds-evals/cases/screenshots/form-with-navigation.png is a
+    screenshot of a settings screen. Read that image file to see the intended
+    layout, fields, and controls, then implement the screen matching the design
+    as closely as possible.
+metadata:
+  expectedComponents:
+  - name: FormPage
+  - name: FormPage.Header
+    props:
+      title: Company
+  - name: FormPage.Section
+    props:
+      title: Company details
+  - name: FormPage.Card
+  - name: FormPage.Row
+  - name: InputField
+    props:
+      label: Company name
+  - name: InputField
+    props:
+      label: Help Scout subdomain
+      description: This is used to create the default email address for each inbox.
+      inlineSuffix: .helpscoutapp.com
+  - name: Button
+    props:
+      label: Change subdomain
+      size: sm
+      outlined: true
+  - name: FormPage.Section
+    props:
+      title: Additional preferences
+  - name: EntryList
+  - name: EntryList.Item
+    props:
+      title: Conversations
+      description: Open tracking, conversation locking etc
+  - name: EntryList.Item
+    props:
+      title: Time
+      description: Timezone, office hours etc
+  - name: EntryList.Item
+    props:
+      title: Content filtering
+      description: Block or allow certain sources
+  - name: FormPage.Footer
+  - name: Form.Actions

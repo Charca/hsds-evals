@@ -1,0 +1,61 @@
+description: Form with Navigation (Text Only Prompt)
+vars:
+  task: >
+    Implement a 'Company details' settings page centered on a white background. The page is composed of two card modules stacked vertically (gap 32px), followed by a footer action bar, all constrained to 656px wide and centered horizontally.
+
+    Module 1 – Company details (Form module):
+    A bordered card with a primary page header showing the heading 'Company details' above the card. Inside the card (padded 16px all sides, vertical gap 16px) there are three form rows:
+    1. A labeled text input for 'Company name' with the current value 'J&G Fashion'.
+    2. A labeled text input for 'Help Scout subdomain' with a description line reading 'This is used to create the default email address for each inbox. Learn more' (where 'Learn more' is a blue inline link). The input shows 'jandgfashion' as the value with a '.helpscoutapp.com' suffix rendered inline at the right edge of the input.
+    3. A button row containing a single small outlined blue button labeled 'Change subdomain'.
+    
+    Module 2 – Additional preferences (Index module):
+    A secondary section header 'Additional preferences' sits above a bordered card. Inside the card (padded 16px horizontal, 20px vertical, gap 12px) there are three navigable index rows separated by thin dividers:
+    1. Row: Charcoal squircle icon with an envelope-closed glyph, label 'Conversations', description 'Open tracking, conversation locking etc', and a chevron-right icon button on the far right.
+    2. Row: Charcoal squircle icon with a clock glyph, label 'Time', description 'Timezone, office hours etc', and a chevron-right icon button.
+    3. Row: Charcoal squircle icon with a page-block glyph, label 'Content filtering', description 'Block or allow certain sources', and a chevron-right icon button.
+
+    Footer:
+    Right-aligned action row with two buttons: an outlined grey 'Cancel' button (md) and a filled blue 'Save' button (md).
+metadata:
+  expectedComponents:
+  - name: FormPage
+  - name: FormPage.Header
+    props:
+      title: Company
+  - name: FormPage.Section
+    props:
+      title: Company details
+  - name: FormPage.Card
+  - name: FormPage.Row
+  - name: InputField
+    props:
+      label: Company name
+  - name: InputField
+    props:
+      label: Help Scout subdomain
+      description: This is used to create the default email address for each inbox.
+      inlineSuffix: .helpscoutapp.com
+  - name: Button
+    props:
+      label: Change subdomain
+      size: sm
+      outlined: true
+  - name: FormPage.Section
+    props:
+      title: Additional preferences
+  - name: EntryList
+  - name: EntryList.Item
+    props:
+      title: Conversations
+      description: Open tracking, conversation locking etc
+  - name: EntryList.Item
+    props:
+      title: Time
+      description: Timezone, office hours etc
+  - name: EntryList.Item
+    props:
+      title: Content filtering
+      description: Block or allow certain sources
+  - name: FormPage.Footer
+  - name: Form.Actions

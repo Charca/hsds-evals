@@ -1,0 +1,37 @@
+description: Simple Form (Text Only Prompt)
+vars:
+  task: >
+    Implement a 'Conversations' settings screen. It's a simple form with some fields and actions.
+    
+    The page header is Conversations. Then, there is a form module card with 4 fields:
+    
+    1. Switch field (enabled) with label 'Open tracking' and description text 'Know when a customer opens an email. See an example.'
+    2. Switch field (enabled) with label 'Enrich customer data' and description 'Auto-update customer profiles with data from their Gravatar account such as avatars, phone numbers, and social/website links'.
+    3. Text input field with label 'Conversation lock' and suffix "days".
+    4. Text input field with label 'Next conversation'.
+    
+    The form actions are Cancel and Save (primary)
+metadata:
+  expectedComponents:
+    - name: FormPage
+    - name: FormPage.Header
+      props:
+        title: Conversations
+    - name: Form
+    - name: FormPage.Section
+    - name: FormPage.Card
+    - name: SwitchField
+      props:
+        label: Open tracking
+    - name: SwitchField
+      props:
+        label: Enrich customer data
+    - name: InputField
+      props:
+        label: Conversation lock
+        inlineSuffix: days
+    - name: InputField
+      props:
+        label: Next conversation
+    - name: FormPage.Footer
+    - name: Form.Actions

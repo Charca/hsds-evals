@@ -1,0 +1,20 @@
+{
+  "name": "@helpscout/hsds-evals",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Evaluations for Claude-Code-generated HSDS code, powered by promptfoo + the Claude Agent SDK",
+  "scripts": {
+    "eval": "promptfoo eval --no-cache",
+    "eval:debug": "promptfoo eval --no-cache -j 1 --verbose",
+    "eval:view": "promptfoo view",
+    "eval:share": "promptfoo share",
+    "lint": "eslint --quiet --ext .js,.cjs assertions/",
+    "lint:fix": "npm run lint -- --fix"
+  },
+  "devDependencies": {
+    "@anthropic-ai/claude-agent-sdk": "^0.3.150",
+    "eslint-config-custom": "*",
+    "prettier-config-custom": "*",
+    "promptfoo": "^0.121.12"
+  }
+}
