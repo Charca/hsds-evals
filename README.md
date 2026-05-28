@@ -33,8 +33,8 @@ npm install
 
 # Anthropic API key — copy .env.example to .env and fill in.
 # Promptfoo auto-loads .env from the workspace dir via dotenv.
-cp packages/hsds-evals/.env.example packages/hsds-evals/.env
-$EDITOR packages/hsds-evals/.env
+cp .env.example .env
+$EDITOR .env
 ```
 
 (Alternatively: `export ANTHROPIC_API_KEY=...` in your shell.)
@@ -42,8 +42,8 @@ $EDITOR packages/hsds-evals/.env
 ## Run
 
 ```bash
-npm run eval -w @helpscout/hsds-evals       # run all cases
-npm run eval:view -w @helpscout/hsds-evals  # open the web UI
+npm run eval        # run all cases
+npm run eval:view   # open the web UI
 ```
 
 Add `-- --filter-description "permissions"` to limit which cases run.
