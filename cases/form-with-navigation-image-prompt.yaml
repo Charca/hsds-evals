@@ -1,7 +1,7 @@
 description: Form with Navigation (Text + Image Prompt)
 vars:
   task: >
-    The file packages/hsds-evals/cases/screenshots/form-with-navigation.png is a
+    The file ../hsds-evals/cases/screenshots/form-with-navigation.png is a
     screenshot of a settings screen. Read that image file to see the intended
     layout, fields, and controls, then implement the screen matching the design
     as closely as possible.
